@@ -17,20 +17,27 @@ def clean_storage():
     recordings = os.listdir("video/")
     if len(recordings) > 5:
         try:
-            os.remove(recordings(len(recordings) - 1))
+            os.remove(recordings[len(recordings) - 1])
         except Exception as e:
-            print(f"Failed to delete {recordings(len(recordings) - 1)}. Reason: {e}")
+            print(f"Failed to delete {recordings[len(recordings) - 1]}. Reason: {e}")
 
+def log_event(event):
+    print(event)
+    with open('activity.log', 'a', encoding='utf-8') as f:
+        f.write(event)
 
 def main():
     while True:
         filename = get_file_name()
         pir.wait_for_motion()
-        print(f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.')
+        event = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.'
+        log_event(event)
         camera.start_recording(filename)
+        print("Recording started...")
         # Record for 20 seconds
         camera.wait_recording(20)
         camera.stop_recording()
+        print("...recording stopped")
         clean_storage()
         time.sleep(2)
 
