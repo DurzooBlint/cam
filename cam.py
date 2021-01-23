@@ -25,12 +25,13 @@ def clean_storage():
 def main():
     while True:
         filename = get_file_name()
-        pir.wait_for_motion
+        pir.wait_for_motion()
         print(f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.')
         camera.start_recording(filename)
         # Record for 20 seconds
         camera.wait_recording(20)
         camera.stop_recording()
+        clean_storage()
         time.sleep(2)
 
 
