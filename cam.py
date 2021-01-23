@@ -17,7 +17,7 @@ def clean_storage():
     recordings = os.listdir("video/")
     if len(recordings) > 5:
         try:
-            os.remove(recordings[len(recordings) - 1])
+            os.remove("video/" + recordings[len(recordings) - 1])
         except Exception as e:
             print(f"Failed to delete {recordings[len(recordings) - 1]}. Reason: {e}")
 
