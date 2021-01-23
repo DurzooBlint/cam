@@ -21,10 +21,12 @@ def clean_storage():
         except Exception as e:
             print(f"Failed to delete {recordings[len(recordings) - 1]}. Reason: {e}")
 
+
 def log_event(event):
     print(event)
     with open('activity.log', 'a', encoding='utf-8') as f:
-        f.write(event)
+        f.write(event + '\n')
+
 
 def main():
     while True:
