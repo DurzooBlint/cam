@@ -26,9 +26,9 @@ def main():
     while True:
         filename = get_file_name()
         pir.wait_for_motion
-        print("Jellybean thief detected!")
+        print(f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.')
         camera.start_recording(filename)
-        # Record for 10 seconds
+        # Record for 20 seconds
         camera.wait_recording(20)
         camera.stop_recording()
         time.sleep(2)
