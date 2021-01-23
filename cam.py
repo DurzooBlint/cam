@@ -1,11 +1,38 @@
 from gpiozero import MotionSensor
 from picamera import PiCamera
+import os
+import time
+import datetime
 
+# GPIO-4 (Pin 7) - PIR sensor
 pir = MotionSensor(4)
 camera = PiCamera()
 
-while True:
-    pir.wait_for_motion()
-    if pir.motion_detected:
-        print("Good Looking Person Detected")
-        camera.start_preview()
+
+def get_file_name():
+    return datetime.datetime.now().strftime("video/%Y-%m-%d_%H.%M.%S.h264")
+
+
+def clean_storage():
+    recordings = os.listdir("video/")
+    if len(recordings) > 5:
+        try:
+            os.remove(recordings(len(recordings) - 1))
+        except Exception as e:
+            print(f"Failed to delete {recordings(len(recordings) - 1)}. Reason: {e}")
+
+
+def main():
+    while True:
+        filename = get_file_name()
+        pir.wait_for_motion
+        print("Jellybean thief detected!")
+        camera.start_recording(filename)
+        # Record for 10 seconds
+        camera.wait_recording(20)
+        camera.stop_recording()
+        time.sleep(2)
+
+
+if __name__ == "__main__":
+    main()
