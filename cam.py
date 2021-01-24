@@ -3,6 +3,7 @@ from picamera import PiCamera
 import os
 import time
 import datetime
+import messenger
 
 # GPIO-4 (Pin 7) - PIR sensor
 pir = MotionSensor(4)
@@ -29,11 +30,14 @@ def log_event(event):
 
 
 def main():
+    print("Monitoring for activity...")
     while True:
         filename = get_file_name()
         pir.wait_for_motion()
         event = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.'
         log_event(event)
+        email = messenger.Email('marcin.karpik@gmail.com', 'Alert: movement detected', 'Movement detected:\n')
+        email.send_email()
         camera.start_recording(filename)
         print("Recording started...")
         # Record for 20 seconds
