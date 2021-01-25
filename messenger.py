@@ -66,6 +66,8 @@ class Email:
 
         # Create secure connection with server and send email
         context = ssl.create_default_context()
+        print("*" + self.GMAIL_USERNAME + "*")
+        print("*" + self.GMAIL_PASSWORD + "*")
         with smtplib.SMTP_SSL(self.SMTP_SERVER, self.SMTP_PORT, context=context) as server:
             server.login(self.GMAIL_USERNAME, self.GMAIL_PASSWORD)
             server.sendmail(
