@@ -18,4 +18,4 @@ class CameraWrapper():
     def video_capture(self, filename, length=30):
         self.camera.start_recording(filename)
         self.camera.wait_recording(length)
-        self.camera.start_recording()
+        self.camera.stop_recording()
