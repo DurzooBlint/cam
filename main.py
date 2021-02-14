@@ -35,8 +35,8 @@ def main():
         pir.wait_for_motion()
         event = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")} Movement detected.'
         log_event(event)
-        email = messenger.Email('marcin.karpik@gmail.com', 'Alert: movement detected', 'Movement detected:\n')
-        email.send_email()
+        # email = messenger.Email('marcin.karpik@gmail.com', 'Alert: movement detected', 'Movement detected:\n')
+        # email.send_email()
         camwrapper.CameraWrapper.video_capture(filename, length=30)
         clean_storage()
         time.sleep(2)
