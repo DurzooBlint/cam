@@ -1,13 +1,12 @@
 from gpiozero import MotionSensor
-from picamera import PiCamera
 import os
 import time
 import datetime
 import messenger
+import camwrapper
 
 # GPIO-4 (Pin 7) - PIR sensor
 pir = MotionSensor(4)
-camera = PiCamera()
 
 
 def get_file_name():
@@ -38,12 +37,7 @@ def main():
         log_event(event)
         email = messenger.Email('marcin.karpik@gmail.com', 'Alert: movement detected', 'Movement detected:\n')
         email.send_email()
-        camera.start_recording(filename)
-        print("Recording started...")
-        # Record for 20 seconds
-        camera.wait_recording(20)
-        camera.stop_recording()
-        print("...recording stopped")
+        camwrapper.CameraWrapper.video_capture(filename, length=30)
         clean_storage()
         time.sleep(2)
 

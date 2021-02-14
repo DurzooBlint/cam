@@ -21,24 +21,6 @@ class Email:
         self.GMAIL_PASSWORD = config['DEFAULT']['GMAIL_PASSWORD']
 
     def send_email(self):
-        # # Create Headers
-        # headers = ["From: " + self.GMAIL_USERNAME, "Subject: " + self.subject, "To: " + self.recipient,
-        #            "MIME-Version: 1.0", "Content-Type: text/html"]
-        # headers = "\r\n".join(headers)
-        #
-        # # Connect to Gmail Server
-        # session = smtplib.SMTP(self.SMTP_SERVER, self.SMTP_PORT)
-        # session.ehlo()
-        # session.starttls()
-        # session.ehlo()
-        #
-        # # Login to Gmail
-        # session.login(self.GMAIL_USERNAME, self.GMAIL_PASSWORD)
-        #
-        # # Send Email & Exit
-        # session.sendmail(self.GMAIL_USERNAME, self.recipient, headers + "\r\n\r\n" + self.body)
-        # session.quit
-
         message = MIMEMultipart("alternative")
         message["Subject"] = "Guardian alert: Activity detected"
         message["From"] = self.GMAIL_USERNAME
